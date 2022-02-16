@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -8,19 +9,21 @@ public class EnemyMove : MonoBehaviour
 
     public Rigidbody rb;
 
-    public GameObject PlayerPos;
+    protected NavMeshAgent Enemy;
+
+    public Transform PlayerPos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        Enemy = GetComponent<NavMeshAgent>();
     }
 
     
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 pos = Vector3.MoveTowards(transform.position, PlayerPos.transform.position, speed * Time.fixedDeltaTime);
-
-        rb.MovePosition(pos);
-
+        //rb.velocity = Vector3.forward * speed * Time.deltaTime;
+        Enemy.SetDestination(PlayerPos.position);
     }
 }

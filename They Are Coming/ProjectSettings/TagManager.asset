@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - X2
   - +10
+  - +15
   layers:
   - Default
   - TransparentFX

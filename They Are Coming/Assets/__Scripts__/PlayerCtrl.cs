@@ -67,11 +67,11 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("X2"))
+        if (other.gameObject.CompareTag("+15"))
         {
-            
+            StartCoroutine(_15PlayerSpawn());
 
-            Debug.Log("x2");
+            Debug.Log("+15");
         }
 
         if (other.gameObject.CompareTag("+10"))
@@ -83,10 +83,31 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator _10PlayerSpawn()
     {
+        
         for(int i = 0; i < 10; i++)
         {
-            GameObject playerClone = Instantiate(player, PlayerHolder.transform.position + new Vector3(Random.insideUnitSphere.x * 2, 1, Random.insideUnitSphere.z * 2),
-                                                 PlayerHolder.transform.rotation);
+            Vector3 spawnLocation = new Vector3(PlayerHolder.transform.position.x, PlayerHolder.transform.position.y, PlayerHolder.transform.position.z - 1) + 
+                                    new Vector3(Random.onUnitSphere.x * Random.Range(-1.5f, 1.5f), 1, Random.onUnitSphere.z * Random.Range(-1.5f, 1.5f));
+
+            GameObject playerClone = Instantiate(player,spawnLocation, PlayerHolder.transform.rotation);
+
+            playerClone.transform.SetParent(PlayerHolder.transform);
+
+            yield return new WaitForSeconds(0.1f);
+
+            playerCount += 1;
+        }
+    }
+
+    IEnumerator _15PlayerSpawn()
+    {
+
+        for (int i = 0; i < 15; i++)
+        {
+            Vector3 spawnLocation = new Vector3(PlayerHolder.transform.position.x, PlayerHolder.transform.position.y, PlayerHolder.transform.position.z - 1) +
+                                    new Vector3(Random.onUnitSphere.x * Random.Range(-1.5f, 1.5f), 1, Random.onUnitSphere.z * Random.Range(-1.5f, 1.5f));
+
+            GameObject playerClone = Instantiate(player, spawnLocation, PlayerHolder.transform.rotation);
 
             playerClone.transform.SetParent(PlayerHolder.transform);
 
