@@ -27,7 +27,7 @@ public class BulletFire : MonoBehaviour
         {
             Instantiate(bulletPrefabs, PointFire.transform.position, Quaternion.identity);
 
-            timeStamp = Time.time + 0.8f;
+            timeStamp = Time.time + 1.2f;
         }
     }
 }

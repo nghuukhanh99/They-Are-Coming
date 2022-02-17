@@ -7,8 +7,6 @@ public class PlayerCtrl : MonoBehaviour
 {
     public float speed = 5f;
 
-    public Rigidbody rb;
-
     public GameObject player;
 
     public GameObject PlayerHolder;

@@ -7,23 +7,35 @@ public class EnemyMove : MonoBehaviour
 {
     public float speed;
 
-    public Rigidbody rb;
+    public float stoppingDistance;
 
-    protected NavMeshAgent Enemy;
+    public float retreatDistance;
 
-    public Transform PlayerPos;
+    public Transform Player;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        Enemy = GetComponent<NavMeshAgent>();
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     
     void Update()
     {
-        //rb.velocity = Vector3.forward * speed * Time.deltaTime;
-        Enemy.SetDestination(PlayerPos.position);
+        // Enemy follow multiplayer with tag
+
+
+        transform.LookAt(Player.transform);
+        if (Vector3.Distance(transform.position, Player.position) > stoppingDistance)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
+        }
+        else if(Vector3.Distance(transform.position, Player.position) < stoppingDistance && Vector3.Distance(transform.position, Player.position) > retreatDistance)
+        {
+            transform.position = this.transform.position;
+        }
+        else if(Vector3.Distance(transform.position, Player.position) < retreatDistance)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
+        }
     }
 }

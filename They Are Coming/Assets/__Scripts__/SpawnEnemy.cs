@@ -6,7 +6,7 @@ public class SpawnEnemy : MonoBehaviour
 {
     public GameObject EnemyPrefabs;
 
-    public List<Transform> spawnPos = new List<Transform>();
+    //public List<Transform> spawnPos = new List<Transform>();
 
     public float timeStamp;
 
@@ -27,9 +27,10 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-                Instantiate(EnemyPrefabs, spawnPos[Random.Range(0, spawnPos.Count)].position, Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
+                Instantiate(EnemyPrefabs, /*spawnPos[Random.Range(0, spawnPos.Count)].position*/ new Vector3(Random.Range(-4, 4), 1, 65)
+                    , Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
 
-                timeStamp = Time.time + 0.2f;
+                timeStamp = Time.time + 0.1f;
             }
         }
     }

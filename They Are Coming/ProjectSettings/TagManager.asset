@@ -9,6 +9,7 @@ TagManager:
   - X2
   - +10
   - +15
+  - Trap
   layers:
   - Default
   - TransparentFX
