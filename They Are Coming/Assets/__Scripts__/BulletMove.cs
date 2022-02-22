@@ -43,9 +43,11 @@ public class BulletMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
 
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+
+            SpawnEnemy.Instance.listEnemy.RemoveAt(0);
         }
     }
 }

@@ -379,15 +379,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454860, guid: 8b091b1e36967674795aa3206cd51ed9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 454860, guid: 8b091b1e36967674795aa3206cd51ed9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 454860, guid: 8b091b1e36967674795aa3206cd51ed9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 454860, guid: 8b091b1e36967674795aa3206cd51ed9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464492143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 253423383}
@@ -1222,6 +1222,10 @@ PrefabInstance:
     - target: {fileID: 132090, guid: 3d0ba9093894f82429688ddeb31a11f1, type: 3}
       propertyPath: m_TagString
       value: Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 432086, guid: 3d0ba9093894f82429688ddeb31a11f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -4.7961655
       objectReference: {fileID: 0}
     - target: {fileID: 432090, guid: 3d0ba9093894f82429688ddeb31a11f1, type: 3}
       propertyPath: m_RootOrder
@@ -2362,9 +2366,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076370080}
+  - component: {fileID: 1076370082}
+  - component: {fileID: 1076370081}
   m_Layer: 0
-  m_Name: Wave increase Playe
-  m_TagString: Untagged
+  m_Name: Wave increase Player
+  m_TagString: Increase Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2390,6 +2396,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1076370081
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076370079}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1076370082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076370079}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.983215, y: 2.0042887, z: 0.24456024}
+  m_Center: {x: 0.0007724762, y: 2.0054412, z: 40.001102}
 --- !u!1 &1120078979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3932,9 +3967,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780076621}
+  - component: {fileID: 1780076622}
+  - component: {fileID: 1780076623}
   m_Layer: 0
   m_Name: Wave increase Player
-  m_TagString: Untagged
+  m_TagString: Increase Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3960,6 +3997,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1780076622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780076620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.983215, y: 2.0042887, z: 0.24456024}
+  m_Center: {x: 0.0007724762, y: 2.0054412, z: 40.001102}
+--- !u!54 &1780076623
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780076620}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1781127900
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,6 +5245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs: {fileID: 1899017354072911814, guid: 348fae3262f4c8941abdbd9e886a2f15,
     type: 3}
+  listEnemy: []
   timeStamp: 0
 --- !u!4 &2096764058
 Transform:
@@ -5463,6 +5530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Holder
       objectReference: {fileID: 0}
+    - target: {fileID: 8748197018785924917, guid: 92ccb8bf6442e0342b02beff3726324d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player Holder
+      objectReference: {fileID: 0}
     - target: {fileID: 8748197018785924919, guid: 92ccb8bf6442e0342b02beff3726324d,
         type: 3}
       propertyPath: m_RootOrder
@@ -5518,5 +5590,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1088145221711168548, guid: 92ccb8bf6442e0342b02beff3726324d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92ccb8bf6442e0342b02beff3726324d, type: 3}

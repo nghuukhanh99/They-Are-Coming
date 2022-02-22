@@ -10,8 +10,9 @@ public class DetechPushPlayer : MonoBehaviour
         
     }
 
+    
 
-    void Update()
+    void LateUpdate()
     {
         rb.velocity = Vector3.zero;
     }

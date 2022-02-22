@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    public static SpawnEnemy Instance;
+
     public GameObject EnemyPrefabs;
+
+    public List<GameObject> listEnemy = new List<GameObject>();
+
+
 
     //public List<Transform> spawnPos = new List<Transform>();
 
     public float timeStamp;
 
+    
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         
@@ -27,10 +38,11 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-                Instantiate(EnemyPrefabs, /*spawnPos[Random.Range(0, spawnPos.Count)].position*/ new Vector3(Random.Range(-4, 4), 1, 65)
-                    , Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
+               GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
 
-                timeStamp = Time.time + 0.1f;
+                listEnemy.Add(Enemy);
+
+                timeStamp = Time.time + 0.2f;
             }
         }
     }

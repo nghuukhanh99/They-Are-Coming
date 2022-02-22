@@ -77,6 +77,12 @@ public class PlayerCtrl : MonoBehaviour
             StartCoroutine(_10PlayerSpawn());
             Debug.Log("+10");
         }
+
+        if(other.gameObject.CompareTag("Increase Player"))
+        {
+            other.gameObject.SetActive(false);
+            Debug.Log("increase");
+        }
     }
 
     IEnumerator _10PlayerSpawn()

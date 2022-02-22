@@ -19,7 +19,7 @@ public class DestroyPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Trap"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             Debug.Log("destroy");
         }
     }

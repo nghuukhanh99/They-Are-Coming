@@ -18,16 +18,25 @@ public class BulletFire : MonoBehaviour
     
     void Update()
     {
+        StartCoroutine(spawnBullet());
         spawnBullet();
     }
 
-    void spawnBullet()
+    
+    IEnumerator spawnBullet()
     {
-        if (Time.time > timeStamp)
+        if(GameManager.Instance.isGameActive == true)
         {
-            Instantiate(bulletPrefabs, PointFire.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
+            if (Time.time > timeStamp)
+            {
+                Instantiate(bulletPrefabs, PointFire.transform.position, Quaternion.identity);
 
-            timeStamp = Time.time + 1.2f;
+                timeStamp = Time.time + 3f;
+
+                yield return new WaitForSeconds(1f);
+                
+            }
         }
     }
 }
