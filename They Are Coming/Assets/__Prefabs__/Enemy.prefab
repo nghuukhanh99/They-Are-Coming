@@ -480,10 +480,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36940d5f41a68b04c86a0d943263e6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  stoppingDistance: 0
-  retreatDistance: 10
-  Player: {fileID: 8594426185558674317, guid: bd551e4180de5ad4193fdc6ac3890037, type: 3}
+  speed: 4
+  boostTimer: 0
+  boosting: 1
+  startTimeRepeat: 0
+  repeatRate: 4
 --- !u!1 &2330241399754721244
 GameObject:
   m_ObjectHideFlags: 0

@@ -990,6 +990,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8594426185558674315}
+  PlayerHolder: {fileID: 2528073473240736715, guid: d2f1a733326040247b2f080e78d0e373,
+    type: 3}
 --- !u!114 &3770321433542214414
 MonoBehaviour:
   m_ObjectHideFlags: 0

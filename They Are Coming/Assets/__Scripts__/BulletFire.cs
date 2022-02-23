@@ -32,7 +32,7 @@ public class BulletFire : MonoBehaviour
             {
                 Instantiate(bulletPrefabs, PointFire.transform.position, Quaternion.identity);
 
-                timeStamp = Time.time + 3f;
+                timeStamp = Time.time + 2f;
 
                 yield return new WaitForSeconds(1f);
                 

@@ -6,37 +6,47 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviour
 {
     public float speed;
-
-    public float stoppingDistance;
-
-    public float retreatDistance;
-
-    public Transform Player;
-
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     
     void Update()
     {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
+        detectPlayer();
+    }
 
-        transform.LookAt(Player.transform);
-
-        // Enemy follow multiplayer with tag
-        if (Vector3.Distance(transform.position, Player.position) > stoppingDistance)
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Boost Speed")
         {
-            transform.position = Vector3.MoveTowards(transform.position, Player.position, 5f * Time.deltaTime);
+
+            Debug.Log("SpeedBoost");
         }
-        else if (Vector3.Distance(transform.position, Player.position) < stoppingDistance && Vector3.Distance(transform.position, Player.position) > retreatDistance)
+    }
+
+    void detectPlayer()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, 5f);
+
+        foreach(Collider hit in hits)
         {
-            transform.position = this.transform.position;
-        }
-        else if (Vector3.Distance(transform.position, Player.position) < retreatDistance)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, Player.position, -0.5f * Time.deltaTime);
+            if(hit.transform == null)
+            {
+                return;
+            }
+
+            if(hit.tag == "Player")
+            {
+                float step = 0.05f * Time.deltaTime;
+
+                transform.position = Vector3.MoveTowards(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, step);
+
+                transform.LookAt(GameObject.Find("Player").GetComponent<Transform>().position);
+            }
         }
     }
 }

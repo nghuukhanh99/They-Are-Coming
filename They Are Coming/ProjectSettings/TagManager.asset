@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - Increase Player
   - Player Holder
+  - Boost Speed
   layers:
   - Default
   - TransparentFX
