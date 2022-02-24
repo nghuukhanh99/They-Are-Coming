@@ -6,7 +6,7 @@ public class BulletMove : MonoBehaviour
 {
     public static BulletMove Instance;
 
-    public float speedBullet = 7f;
+    public float speedBullet = 10f;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class BulletMove : MonoBehaviour
 
     IEnumerator AutoDestroy()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(1.5f);
 
         Destroy(this.gameObject);
     }
@@ -43,7 +43,7 @@ public class BulletMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
 
             other.gameObject.SetActive(false);
 

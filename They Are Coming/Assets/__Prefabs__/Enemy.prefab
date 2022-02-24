@@ -480,11 +480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36940d5f41a68b04c86a0d943263e6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3
   boostTimer: 0
-  boosting: 1
-  startTimeRepeat: 0
-  repeatRate: 4
 --- !u!1 &2330241399754721244
 GameObject:
   m_ObjectHideFlags: 0

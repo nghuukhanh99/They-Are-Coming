@@ -10,11 +10,9 @@ public class SpawnEnemy : MonoBehaviour
 
     public List<GameObject> listEnemy = new List<GameObject>();
 
-
-
-    //public List<Transform> spawnPos = new List<Transform>();
-
     public float timeStamp;
+
+    public int enemyCount;
 
     
     void Awake()
@@ -30,7 +28,10 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         spawnTheEnemy();
+     
     }
+
+    
 
     void spawnTheEnemy()
     {
@@ -38,11 +39,22 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-               GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
+                if(PlayerCtrl.Instance.stopSpawnObject == false)
+                {
+                    for(int i = 0; enemyCount < ; i++)
+                    {
+                        
+                    }
 
-                listEnemy.Add(Enemy);
+                    GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
 
-                timeStamp = Time.time + 0.2f;
+                    listEnemy.Add(Enemy);
+
+                    timeStamp = Time.time + 0.15f;
+
+                    enemyCount += 1;
+
+                }
             }
         }
     }

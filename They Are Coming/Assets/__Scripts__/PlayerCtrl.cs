@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    public static PlayerCtrl Instance;
+
     public float speed = 5f;
 
     public GameObject player;
@@ -19,15 +21,24 @@ public class PlayerCtrl : MonoBehaviour
 
     public GameObject SpawnPos;
 
+    public bool stopSpawnObject;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
-
+        stopSpawnObject = false;
     }
     
     void Update()
     {
         PlayerMovement();
         CantMoveOutOfBounds();
+
+        
     }
 
     void PlayerMovement()
@@ -60,6 +71,15 @@ public class PlayerCtrl : MonoBehaviour
         if (transform.position.x > rightBound)
         {
             transform.position = new Vector3(rightBound, transform.position.y, transform.position.z);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Stop Spawn")
+        {
+            stopSpawnObject = true;
+            Debug.Log("Off");
         }
     }
 

@@ -5,10 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
-    public float speed;
+
+    [SerializeField] private float speed;
+    public float boostTimer;
+    private bool boosting;
+    
     void Start()
     {
-
+        speed = 3f;
+        boostTimer = 0;
+        boosting = false;
     }
 
     
@@ -17,12 +23,28 @@ public class EnemyMove : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         detectPlayer();
+
+        if (boosting)
+        {
+            boostTimer += Time.deltaTime;
+            if (boostTimer >= 0.2f)
+            {
+                speed = 3f;
+
+                boostTimer = 0;
+
+                boosting = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Boost Speed")
         {
+            boosting = true;
+
+            speed = 8f; 
 
             Debug.Log("SpeedBoost");
         }
