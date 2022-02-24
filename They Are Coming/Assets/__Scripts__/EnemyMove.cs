@@ -44,7 +44,7 @@ public class EnemyMove : MonoBehaviour
         {
             boosting = true;
 
-            speed = 7f; 
+            speed = 10f; 
         }
 
         if(other.tag == "Player")
@@ -70,11 +70,11 @@ public class EnemyMove : MonoBehaviour
 
             if(hit.tag == "Player")
             {
-                float step = 0.05f * Time.deltaTime;
+                    float step = 0.05f * Time.deltaTime;
 
-                transform.position = Vector3.MoveTowards(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, step);
+                    transform.position = Vector3.MoveTowards(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, step);
 
-                transform.LookAt(GameObject.Find("Player").GetComponent<Transform>().position);
+                    transform.LookAt(GameObject.Find("Player").GetComponent<Transform>().position);
             }
         }
     }

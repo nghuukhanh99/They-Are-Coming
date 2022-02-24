@@ -8,6 +8,8 @@ public class BulletMove : MonoBehaviour
 
     public float speedBullet = 10f;
 
+    public float timeDestroy = 1.5f;
+
     private void Awake()
     {
         if(Instance == null)
@@ -24,6 +26,11 @@ public class BulletMove : MonoBehaviour
     void Update()
     {
         moveBulletForward();
+
+        if (PlayerCtrl.Instance.sort == true)
+        {
+            timeDestroy = 10f;
+        }
     }
 
     void moveBulletForward()
@@ -34,7 +41,7 @@ public class BulletMove : MonoBehaviour
 
     IEnumerator AutoDestroy()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(timeDestroy);
 
         Destroy(this.gameObject);
     }

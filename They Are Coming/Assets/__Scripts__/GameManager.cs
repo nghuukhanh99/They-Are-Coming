@@ -24,7 +24,16 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        
+        checkNextLevel();
+    }
+
+    public void checkNextLevel()
+    {
+        if(SpawnEnemy.Instance.listEnemy.Count == 0)
+        {
+
+            Debug.Log("NextLevel");
+        }
     }
 
     IEnumerator StartGameDelay()

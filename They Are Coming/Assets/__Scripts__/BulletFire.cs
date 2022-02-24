@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class BulletFire : MonoBehaviour
 {
+    public static BulletFire Instance;
+
     public GameObject bulletPrefabs;
 
     public GameObject PointFire;
 
     public float timeStamp;
 
+    public float timeDelay;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
-        
+        timeDelay = 2f;
     }
 
     
@@ -20,8 +29,14 @@ public class BulletFire : MonoBehaviour
     {
         StartCoroutine(spawnBullet());
         spawnBullet();
+
+        if(PlayerCtrl.Instance.sort == true)
+        {
+            timeDelay = 0.5f;
+        }
     }
 
+    
     
     IEnumerator spawnBullet()
     {
@@ -32,7 +47,7 @@ public class BulletFire : MonoBehaviour
             {
                 Instantiate(bulletPrefabs, PointFire.transform.position, Quaternion.identity);
 
-                timeStamp = Time.time + 2f;
+                timeStamp = Time.time + timeDelay;
 
                 yield return new WaitForSeconds(1f);
                 

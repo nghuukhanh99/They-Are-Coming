@@ -37,7 +37,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-                    if (enemyCount >= 100)
+                    if (enemyCount >= 60)
                     {
                         return;
                     }
