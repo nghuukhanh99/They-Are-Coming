@@ -47,7 +47,7 @@ public class BulletMove : MonoBehaviour
 
             other.gameObject.SetActive(false);
 
-            SpawnEnemy.Instance.listEnemy.RemoveAt(0);
+            SpawnEnemy.Instance.listEnemy.RemoveRange(0, 1);
         }
     }
 }

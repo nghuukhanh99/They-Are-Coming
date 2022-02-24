@@ -13,6 +13,7 @@ TagManager:
   - Increase Player
   - Player Holder
   - Boost Speed
+  - Stop Spawn
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,8 @@ public class PlayerCtrl : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject PlayerCurrent;
+
     public GameObject PlayerHolder;
 
     public int playerCount;
@@ -21,8 +23,13 @@ public class PlayerCtrl : MonoBehaviour
 
     public GameObject SpawnPos;
 
-    public bool stopSpawnObject;
+    public List<GameObject> PlayerList = new List<GameObject>();
 
+    public List<Vector3> PosSortPlayer = new List<Vector3>();
+
+    public Rigidbody rb;
+
+    public bool sort;
     private void Awake()
     {
         Instance = this;
@@ -30,34 +37,41 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
-        stopSpawnObject = false;
+        sort = false;
+        PlayerList.Add(PlayerCurrent);
     }
     
     void Update()
     {
         PlayerMovement();
         CantMoveOutOfBounds();
-
-        
+        if(sort == true)
+        {
+            
+            sortPlayer();
+        }
     }
 
     void PlayerMovement()
     {
         if (GameManager.Instance.isGameActive == true)
         {
-            //Player move back
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-
-            if (Input.GetKey(KeyCode.A))
+            if(sort == false)
             {
-                transform.Translate(Vector3.left * 10 * Time.deltaTime);
-            }
+                //Player move back
+                transform.Translate(Vector3.back * speed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(Vector3.right * 10 * Time.deltaTime);
-            }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    transform.Translate(Vector3.left * 10 * Time.deltaTime);
+                }
 
+                if (Input.GetKey(KeyCode.D))
+                {
+                    transform.Translate(Vector3.right * 10 * Time.deltaTime);
+                }
+            }
+            
         }
     }
 
@@ -74,11 +88,25 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    void sortPlayer()
+    {
+        if(PlayerList != null)
+        {
+            for (int i = 0; i < PlayerList.Count; i++)
+            {
+                PlayerList[i].transform.position = Vector3.MoveTowards(PlayerList[i].transform.position, PosSortPlayer[i], speed * Time.deltaTime);
+                PlayerList[i].GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
+        Debug.Log("Sort");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Stop Spawn")
         {
-            stopSpawnObject = true;
+            sort = true;
+
             Debug.Log("Off");
         }
     }
@@ -115,6 +143,8 @@ public class PlayerCtrl : MonoBehaviour
 
             GameObject playerClone = Instantiate(player,spawnLocation, PlayerHolder.transform.rotation);
 
+            PlayerList.Add(playerClone);
+
             playerClone.transform.SetParent(PlayerHolder.transform);
 
             yield return new WaitForSeconds(0.1f);
@@ -132,6 +162,8 @@ public class PlayerCtrl : MonoBehaviour
                                     new Vector3(Random.onUnitSphere.x * Random.Range(-1.5f, 1.5f), 1, Random.onUnitSphere.z * Random.Range(-1.5f, 1.5f));
 
             GameObject playerClone = Instantiate(player, spawnLocation, PlayerHolder.transform.rotation);
+
+            PlayerList.Add(playerClone);
 
             playerClone.transform.SetParent(PlayerHolder.transform);
 

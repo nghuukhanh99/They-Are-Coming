@@ -19,7 +19,10 @@ public class DestroyPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Trap"))
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+
+            PlayerCtrl.Instance.PlayerList.Remove(gameObject);
+
             Debug.Log("destroy");
         }
     }

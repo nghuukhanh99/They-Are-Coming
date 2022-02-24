@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     
     void Start()
     {
-        speed = 3f;
+        speed = 4f;
         boostTimer = 0;
         boosting = false;
     }
@@ -27,9 +27,9 @@ public class EnemyMove : MonoBehaviour
         if (boosting)
         {
             boostTimer += Time.deltaTime;
-            if (boostTimer >= 0.2f)
+            if (boostTimer >= 0.3f)
             {
-                speed = 3f;
+                speed = 4f;
 
                 boostTimer = 0;
 
@@ -44,9 +44,16 @@ public class EnemyMove : MonoBehaviour
         {
             boosting = true;
 
-            speed = 8f; 
+            speed = 7f; 
+        }
 
-            Debug.Log("SpeedBoost");
+        if(other.tag == "Player")
+        {
+            PlayerCtrl.Instance.PlayerList.RemoveRange(0, 1);
+
+            other.gameObject.SetActive(false);
+
+            this.gameObject.SetActive(false);
         }
     }
 

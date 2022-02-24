@@ -13,15 +13,13 @@ public class SpawnEnemy : MonoBehaviour
     public float timeStamp;
 
     public int enemyCount;
-
-    
     void Awake()
     {
         Instance = this;
     }
     void Start()
     {
-        
+        enemyCount = 0;
     }
 
     
@@ -39,11 +37,9 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-                if(PlayerCtrl.Instance.stopSpawnObject == false)
-                {
-                    for(int i = 0; enemyCount < ; i++)
+                    if (enemyCount >= 100)
                     {
-                        
+                        return;
                     }
 
                     GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
@@ -53,8 +49,6 @@ public class SpawnEnemy : MonoBehaviour
                     timeStamp = Time.time + 0.15f;
 
                     enemyCount += 1;
-
-                }
             }
         }
     }
