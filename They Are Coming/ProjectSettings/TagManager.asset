@@ -14,6 +14,7 @@ TagManager:
   - Player Holder
   - Boost Speed
   - Stop Spawn
+  - Wall Rotate
   layers:
   - Default
   - TransparentFX

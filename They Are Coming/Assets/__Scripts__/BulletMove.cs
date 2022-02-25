@@ -19,7 +19,10 @@ public class BulletMove : MonoBehaviour
     }
     void Start()
     {
-        
+        if (PlayerCtrl.Instance.lockPosZ == true)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, -90f, 0));
+        }
     }
 
     // Update is called once per frame
@@ -31,11 +34,14 @@ public class BulletMove : MonoBehaviour
         {
             timeDestroy = 10f;
         }
+
+        
     }
 
     void moveBulletForward()
     {
         transform.Translate(Vector3.forward * speedBullet * Time.deltaTime);
+
         StartCoroutine(AutoDestroy());
     }
 

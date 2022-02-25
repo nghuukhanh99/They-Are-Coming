@@ -243,6 +243,7 @@ MonoBehaviour:
   - {x: 4.5, y: 1, z: -61}
   rb: {fileID: 249756699260692120}
   sort: 0
+  WallRotate: {fileID: 0}
 --- !u!54 &249756699260692120
 Rigidbody:
   m_ObjectHideFlags: 0

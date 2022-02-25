@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        checkNextLevel();
+        //checkNextLevel();
     }
 
     public void checkNextLevel()

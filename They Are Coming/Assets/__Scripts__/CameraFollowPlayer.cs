@@ -11,22 +11,33 @@ public class CameraFollowPlayer : MonoBehaviour
     public Vector3 offset;
 
     public Vector3 offset2;
+
+    public Vector3 offset3;
     void Start()
     {
         offset2 = new Vector3(0, 0, -10f);
     }
 
-    
+
     void Update()
     {
-        if(PlayerCtrl.Instance.sort == false)
+        if (PlayerCtrl.Instance.normalCamera == true)
         {
             camFollowPlayer();
         }
 
-        if (PlayerCtrl.Instance.sort == true)
+        if (PlayerCtrl.Instance.sortCamera == true)
         {
             camFinishPoint();
+        }
+
+        if(PlayerCtrl.Instance.lockPosZ == true)
+        {
+            PlayerCtrl.Instance.normalCamera = false;
+
+            PlayerCtrl.Instance.sortCamera = false;
+
+            camFollowPlayerIfTurn();
         }
     }
 
@@ -47,5 +58,18 @@ public class CameraFollowPlayer : MonoBehaviour
 
         transform.position = smoothedPosition;
 
+    }
+
+    public void camFollowPlayerIfTurn()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(59f, -90f, 0));
+
+        Vector3 desiredPosition = new Vector3(target.position.x + offset3.x, target.position.y + offset.y, -80f);
+
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+        transform.position = smoothedPosition;
+
+        
     }
 }

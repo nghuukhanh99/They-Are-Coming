@@ -30,6 +30,17 @@ public class PlayerCtrl : MonoBehaviour
     public Rigidbody rb;
 
     public bool sort;
+
+    public bool lockPosX = true;
+
+    public bool lockPosZ = false;
+
+    public GameObject RotatePos;
+
+    public bool sortCamera;
+
+    public bool normalCamera;
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +49,11 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         sort = false;
+
+        sortCamera = false;
+
+        normalCamera = true;
+
         PlayerList.Add(PlayerCurrent);
     }
     
@@ -45,11 +61,16 @@ public class PlayerCtrl : MonoBehaviour
     {
         PlayerMovement();
         CantMoveOutOfBounds();
-        if(sort == true)
+        if (sort == true)
         {
             
             sortPlayer();
         }
+    }
+
+    void rotationPlayer()
+    {
+        PlayerHolder.transform.Rotate(new Vector3(transform.rotation.x, -90f, transform.rotation.z));
     }
 
     void PlayerMovement()
@@ -77,15 +98,30 @@ public class PlayerCtrl : MonoBehaviour
 
     void CantMoveOutOfBounds()
     {
-        if(transform.position.x < leftBound)
+        if(lockPosX == true)
         {
-            transform.position = new Vector3(leftBound, transform.position.y, transform.position.z);
+            if (transform.position.x < leftBound)
+            {
+                transform.position = new Vector3(leftBound, transform.position.y, transform.position.z);
+            }
+            if (transform.position.x > rightBound)
+            {
+                transform.position = new Vector3(rightBound, transform.position.y, transform.position.z);
+            }
         }
 
-        if (transform.position.x > rightBound)
+        if(lockPosZ == true)
         {
-            transform.position = new Vector3(rightBound, transform.position.y, transform.position.z);
+            if(transform.position.z < -83f)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, -83f);
+            }
+            if(transform.position.z > -77f)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, -77f);
+            }
         }
+        
     }
 
     void sortPlayer()
@@ -107,8 +143,14 @@ public class PlayerCtrl : MonoBehaviour
         {
             sort = true;
 
+            normalCamera = false;
+
+            sortCamera = true;
+
             Debug.Log("Off");
         }
+
+       
     }
 
     private void OnTriggerExit(Collider other)
@@ -130,6 +172,19 @@ public class PlayerCtrl : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Debug.Log("increase");
+        }
+
+        if (other.tag == "Wall Rotate")
+        {
+            rotationPlayer();
+
+            lockPosX = false;
+
+            lockPosZ = true;
+
+            RotatePos.gameObject.SetActive(false);
+
+            Debug.Log("Rotate");
         }
     }
 
