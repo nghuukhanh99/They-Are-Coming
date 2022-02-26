@@ -35,7 +35,10 @@ public class BulletMove : MonoBehaviour
             timeDestroy = 10f;
         }
 
-        
+        if (PlayerCtrl.Instance.sortMap2 == true)
+        {
+            timeDestroy = 10f;
+        }
     }
 
     void moveBulletForward()
@@ -56,11 +59,14 @@ public class BulletMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+
             Destroy(this.gameObject);
 
             other.gameObject.SetActive(false);
 
             SpawnEnemy.Instance.listEnemy.RemoveRange(0, 1);
+
+            
         }
     }
 }

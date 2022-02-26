@@ -27,7 +27,7 @@ public class EnemyMove : MonoBehaviour
         if (boosting)
         {
             boostTimer += Time.deltaTime;
-            if (boostTimer >= 0.3f)
+            if (boostTimer >= 0.5f)
             {
                 speed = 4f;
 
@@ -35,6 +35,18 @@ public class EnemyMove : MonoBehaviour
 
                 boosting = false;
             }
+        }
+
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Wall Rotate Enemy")
+        {
+            new WaitForSeconds(1.2f);
+
+            transform.Rotate(new Vector3(transform.rotation.x, -90f, transform.rotation.z));
         }
     }
 
@@ -55,11 +67,13 @@ public class EnemyMove : MonoBehaviour
 
             this.gameObject.SetActive(false);
         }
+
+        
     }
 
     void detectPlayer()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, 5f);
+        Collider[] hits = Physics.OverlapSphere(transform.position, 6f);
 
         foreach(Collider hit in hits)
         {

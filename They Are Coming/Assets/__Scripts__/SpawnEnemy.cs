@@ -13,6 +13,8 @@ public class SpawnEnemy : MonoBehaviour
     public float timeStamp;
 
     public int enemyCount;
+
+    public int enemyCount2;
     void Awake()
     {
         Instance = this;
@@ -26,10 +28,12 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         spawnTheEnemy();
-     
-    }
 
-    
+        if(PlayerCtrl.Instance.isRotate == true)
+        {
+            spawnTheEnemyMap2();
+        }
+    }
 
     void spawnTheEnemy()
     {
@@ -37,18 +41,40 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (Time.time > timeStamp)
             {
-                    if (enemyCount >= 60)
-                    {
-                        return;
-                    }
+                if (enemyCount >= 60)
+                {
+                    return;
+                }
 
-                    GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
+                GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(Random.Range(-4, 4), 1, 60), Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z)));
 
-                    listEnemy.Add(Enemy);
+                listEnemy.Add(Enemy);
 
-                    timeStamp = Time.time + 0.15f;
+                timeStamp = Time.time + 0.15f;
 
-                    enemyCount += 1;
+                enemyCount += 1;
+            }
+        }
+    }
+
+    void spawnTheEnemyMap2()
+    {
+        if (GameManager.Instance.isGameActive == true)
+        {
+            if (Time.time > timeStamp)
+            {
+                if (enemyCount2 >= 60)
+                {
+                    return;
+                }
+
+                GameObject Enemy = Instantiate(EnemyPrefabs, new Vector3(-19.5f, 1f, Random.Range(-76f, -84f)), Quaternion.Euler(new Vector3(transform.rotation.x, 90f, transform.rotation.z)));
+
+                listEnemy.Add(Enemy);
+
+                timeStamp = Time.time + 0.15f;
+
+                enemyCount2 += 1;
             }
         }
     }

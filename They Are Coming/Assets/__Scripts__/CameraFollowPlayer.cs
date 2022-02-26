@@ -13,6 +13,8 @@ public class CameraFollowPlayer : MonoBehaviour
     public Vector3 offset2;
 
     public Vector3 offset3;
+
+    public Vector3 offset4;
     void Start()
     {
         offset2 = new Vector3(0, 0, -10f);
@@ -28,7 +30,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
         if (PlayerCtrl.Instance.sortCamera == true)
         {
-            camFinishPoint();
+            camFinishMap1();
         }
 
         if(PlayerCtrl.Instance.lockPosZ == true)
@@ -39,9 +41,23 @@ public class CameraFollowPlayer : MonoBehaviour
 
             camFollowPlayerIfTurn();
         }
+
+        if(PlayerCtrl.Instance.sortCameraMap2 == true)
+        {
+            camFinishMap2();
+        }
     }
 
-    public void camFinishPoint()
+    public void camFinishMap2()
+    {
+        Vector3 desiredPosition = new Vector3(target.position.x + offset4.x, target.position.y + offset.y, target.position.z + offset4.z);
+
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+        transform.position = smoothedPosition;
+    }
+
+    public void camFinishMap1()
     {
         Vector3 desiredPosition = new Vector3(0, target.position.y + offset.y, target.position.z + offset2.z);
 

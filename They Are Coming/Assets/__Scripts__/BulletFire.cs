@@ -34,6 +34,11 @@ public class BulletFire : MonoBehaviour
         {
             timeDelay = 0.5f;
         }
+
+        if (PlayerCtrl.Instance.sortMap2 == true)
+        {
+            timeDelay = 0.5f;
+        }
     }
 
     

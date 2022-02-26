@@ -15,6 +15,8 @@ TagManager:
   - Boost Speed
   - Stop Spawn
   - Wall Rotate
+  - Stop Spawn Map2
+  - Wall Rotate Enemy
   layers:
   - Default
   - TransparentFX

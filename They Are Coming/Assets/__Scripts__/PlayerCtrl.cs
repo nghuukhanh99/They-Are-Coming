@@ -27,6 +27,8 @@ public class PlayerCtrl : MonoBehaviour
 
     public List<Vector3> PosSortPlayer = new List<Vector3>();
 
+    public List<Vector3> PosSortPlayerMap2 = new List<Vector3>();
+
     public Rigidbody rb;
 
     public bool sort;
@@ -41,6 +43,11 @@ public class PlayerCtrl : MonoBehaviour
 
     public bool normalCamera;
 
+    public bool sortMap2;
+
+    public bool sortCameraMap2;
+
+    public bool isRotate;
     private void Awake()
     {
         Instance = this;
@@ -50,22 +57,26 @@ public class PlayerCtrl : MonoBehaviour
     {
         sort = false;
 
+        sortMap2 = false;
+
         sortCamera = false;
+
+        sortCameraMap2 = false;
 
         normalCamera = true;
 
         PlayerList.Add(PlayerCurrent);
+
+        isRotate = false;
     }
     
     void Update()
     {
         PlayerMovement();
+
         CantMoveOutOfBounds();
-        if (sort == true)
-        {
-            
-            sortPlayer();
-        }
+        
+        sortPlayer();
     }
 
     void rotationPlayer()
@@ -79,17 +90,20 @@ public class PlayerCtrl : MonoBehaviour
         {
             if(sort == false)
             {
-                //Player move back
-                transform.Translate(Vector3.back * speed * Time.deltaTime);
-
-                if (Input.GetKey(KeyCode.A))
+                if(sortCameraMap2 == false)
                 {
-                    transform.Translate(Vector3.left * 10 * Time.deltaTime);
-                }
+                    //Player move back
+                    transform.Translate(Vector3.back * speed * Time.deltaTime);
 
-                if (Input.GetKey(KeyCode.D))
-                {
-                    transform.Translate(Vector3.right * 10 * Time.deltaTime);
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        transform.Translate(Vector3.left * 10 * Time.deltaTime);
+                    }
+
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        transform.Translate(Vector3.right * 10 * Time.deltaTime);
+                    }
                 }
             }
             
@@ -128,11 +142,24 @@ public class PlayerCtrl : MonoBehaviour
     {
         if(PlayerList != null)
         {
-            for (int i = 0; i < PlayerList.Count; i++)
+            if(sort == true)
             {
-                PlayerList[i].transform.position = Vector3.MoveTowards(PlayerList[i].transform.position, PosSortPlayer[i], speed * Time.deltaTime);
-                PlayerList[i].GetComponent<Rigidbody>().isKinematic = true;
+                for (int i = 0; i < PlayerList.Count; i++)
+                {
+                    PlayerList[i].transform.position = Vector3.MoveTowards(PlayerList[i].transform.position, PosSortPlayer[i], speed * Time.deltaTime);
+                    PlayerList[i].GetComponent<Rigidbody>().isKinematic = true;
+                }
             }
+
+            if(sortMap2 == true)
+            {
+                for (int i = 0; i < PlayerList.Count; i++)
+                {
+                    PlayerList[i].transform.position = Vector3.MoveTowards(PlayerList[i].transform.position, PosSortPlayerMap2[i], speed * Time.deltaTime);
+                    PlayerList[i].GetComponent<Rigidbody>().isKinematic = true;
+                }
+            }
+           
         }
         Debug.Log("Sort");
     }
@@ -150,7 +177,17 @@ public class PlayerCtrl : MonoBehaviour
             Debug.Log("Off");
         }
 
-       
+        if (other.tag == "Stop Spawn Map2")
+        {
+            sortMap2 = true;
+
+            normalCamera = false;
+
+            sortCameraMap2 = true;
+
+            Debug.Log("Off");
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -177,6 +214,8 @@ public class PlayerCtrl : MonoBehaviour
         if (other.tag == "Wall Rotate")
         {
             rotationPlayer();
+
+            isRotate = true;
 
             lockPosX = false;
 
