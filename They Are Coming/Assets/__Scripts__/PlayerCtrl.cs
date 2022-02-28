@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using EasyJoystick;
 
 public class PlayerCtrl : MonoBehaviour
 {
     public static PlayerCtrl Instance;
+
+    public Joystick joystick;
 
     public float speed = 5f;
 
@@ -48,9 +51,13 @@ public class PlayerCtrl : MonoBehaviour
     public bool sortCameraMap2;
 
     public bool isRotate;
+
+    public bool moveX;
     private void Awake()
     {
         Instance = this;
+
+        joystick.gameObject.SetActive(false);
     }
 
     void Start()
@@ -68,6 +75,8 @@ public class PlayerCtrl : MonoBehaviour
         PlayerList.Add(PlayerCurrent);
 
         isRotate = false;
+
+        moveX = true;
     }
     
     void Update()
@@ -92,17 +101,38 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if(sortCameraMap2 == false)
                 {
+                    float xInput = joystick.Horizontal();
+
+                    float zInput = joystick.Vertical();
+
+                    Vector3 moveDirectionX = new Vector3(xInput, 0f, 0f);
+
+                    Vector3 moveDirectionZ = new Vector3(0, 0f, zInput);
+
+                    moveDirectionX.Normalize();
+
                     //Player move back
                     transform.Translate(Vector3.back * speed * Time.deltaTime);
 
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        transform.Translate(Vector3.left * 10 * Time.deltaTime);
-                    }
 
-                    if (Input.GetKey(KeyCode.D))
+                    if(sort == true)
                     {
-                        transform.Translate(Vector3.right * 10 * Time.deltaTime);
+                        transform.Translate(moveDirectionX * 15 * Time.deltaTime, Space.World);
+                    }
+                    
+                    if(GameManager.Instance.Map2Active == true)
+                    {
+                        if(moveX == true)
+                        {
+                            transform.Translate(moveDirectionX * 15 * Time.deltaTime, Space.World);
+                        }
+                        
+                        if(isRotate == true)
+                        {
+                            moveX = false;
+                            transform.Translate(moveDirectionZ * 15 * Time.deltaTime, Space.World);
+                        }
+                        
                     }
                 }
             }
@@ -220,6 +250,8 @@ public class PlayerCtrl : MonoBehaviour
             lockPosX = false;
 
             lockPosZ = true;
+
+            moveX = false;
 
             RotatePos.gameObject.SetActive(false);
 

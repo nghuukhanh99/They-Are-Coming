@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b5f7d30fe779e498f1474a74fbdf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
   speed: 4
   player: {fileID: 8594426185558674318, guid: bd551e4180de5ad4193fdc6ac3890037, type: 3}
   PlayerCurrent: {fileID: 2696434072339600542}
@@ -306,6 +307,7 @@ MonoBehaviour:
   sortMap2: 0
   sortCameraMap2: 0
   isRotate: 0
+  moveX: 0
 --- !u!54 &249756699260692120
 Rigidbody:
   m_ObjectHideFlags: 0
